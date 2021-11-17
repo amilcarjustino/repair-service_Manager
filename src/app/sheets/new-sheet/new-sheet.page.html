@@ -5,77 +5,89 @@
 </ion-header>
 
 <ion-content>
+
+
+
+
+
+
+
+
+
+
+  <ion-grid>
+  <ion-row align-items-center>
+    <ion-col col-12 col-sm-6>
+      <h2>Folha de Obra nº{{sheet.id}}
+      </h2>
+    </ion-col>
+    <ion-col col-12 col-sm-6 hidden-sm>
   
-  <ion-grid class="grid">
-    <ion-row align-self:="" center="" class="align-right row" justify-content-center="">
-      <ion-col class="col" col-12="" col-sm-6="">
-        <h2>Folha de Obra <span class="noprint">nº514/2017</span></h2>
-      </ion-col>
-      <ion-col class="col" col-12="" col-sm-6="" hidden-sm="">
-        <img height="80" item-right="" src="https://firebasestorage.googleapis.com/v0/b/base-6c464.appspot.com/o/logo_mafepre.png?alt=media&amp;token=0d2584bf-d3c8-4333-b98f-8d3bbd6c4d60">
-      </ion-col>
-    </ion-row>
+
+<img item-right src="https://firebasestorage.googleapis.com/v0/b/base-6c464.appspot.com/o/logo_mafepre.png?alt=media&token=0d2584bf-d3c8-4333-b98f-8d3bbd6c4d60">
+
+</ion-col>
+  </ion-row>
   </ion-grid>
 
 
-  <ion-grid class="grid">
-    <ion-row class="row">
-      <ion-col class="col" col-6="" col-sm-9="">
-        <ion-item class="item item-block item-md item-label-floating item-input ng-untouched ng-pristine ng-valid input-has-value"><div class="item-inner"><div class="input-wrapper"><ion-label floating="" class="label label-md" id="lbl-520">Cliente</ion-label><!--template bindings={}--><ion-input type="text" class="input input-md ng-untouched ng-pristine ng-valid"><!--template bindings={}--><input class="text-input text-input-md ng-untouched ng-pristine ng-valid" type="text" placeholder="" min="undefined" max="undefined" step="undefined" aria-labelledby="lbl-520" autocomplete="off" autocorrect="off"><!--template bindings={}--><!--template bindings={}--><button class="text-input-clear-icon button button-md button-clear button-clear-md" clear="" ion-button="" type="button" hidden=""><span class="button-inner"></span><div class="button-effect"></div></button><!--template bindings={}--></ion-input></div><!--template bindings={}--></div><div class="button-effect"></div></ion-item>
+<div class="noprint">
+
+  <button ion-button block color="danger" (click)="toggleDone()" *ngIf="!sheet.done">Não Concluido</button>
+  <button ion-button block color="success" (click)="toggleDone()" *ngIf="sheet.done">Concluido</button>
+
+</div>
+
+
+
+<ion-grid>
+  <ion-row>
+    <ion-col col-12 col-sm-6>
+      <ion-item>
+        <ion-label floating>Cliente</ion-label>
+        <ion-input type="text" [(ngModel)]="sheet.client_name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Morada</ion-label>
+        <ion-input type="text" [(ngModel)]="sheet.client_address"></ion-input>
+      </ion-item>
       </ion-col>
-      <ion-col class="col" col-5="" col-sm-2="">
-        <ion-item class="item item-block item-md item-label-floating input-has-value item-input" text-justify=""><div class="item-inner"><div class="input-wrapper"><ion-label floating="" text-center="" class="label label-md" id="lbl-521">Nº Documento</ion-label><!--template bindings={}--><ion-input text-center="" class="input input-md"><!--template bindings={}--><input class="text-input text-input-md ng-untouched ng-pristine ng-valid" type="text" placeholder="" min="undefined" max="undefined" step="undefined" aria-labelledby="lbl-521" text-center="" autocomplete="off" autocorrect="off"><!--template bindings={}--><!--template bindings={}--><button class="text-input-clear-icon button button-md button-clear button-clear-md" clear="" ion-button="" type="button" hidden=""><span class="button-inner"></span><div class="button-effect"></div></button><!--template bindings={}--></ion-input></div><!--template bindings={}--></div><div class="button-effect"></div></ion-item>
+    <ion-col col-12 col-sm-6>
+      <ion-item>
+        <ion-label floating>Data Inicio</ion-label>
+        <ion-input type="text" [(ngModel)]="sheet.start_date" clearInput></ion-input>
+      </ion-item>
+
+       <ion-item>
+        <ion-label floating>Data de Fim</ion-label>
+        <ion-input type="text" [(ngModel)]="sheet.end_date" clearInput></ion-input>
+      </ion-item>
       </ion-col>
-      <ion-col class="col" col-1="">
-        <!--template bindings={}--><div>
-          <button class="noprint button button-md button-default button-default-md button-md-mafepre" color="mafepre" end="" icon-only="" icon-right="" ion-button="" tappable=""><span class="button-inner">
-          <ion-icon name="print" role="img" class="icon icon-md ion-md-print" aria-label="print"></ion-icon>
-        </span><div class="button-effect"></div></button>
-        </div>
+  </ion-row>
+
+
+
+  <ion-grid>
+  <ion-row>
+    <ion-col col-12 col-sm-5>
+
+<ion-item>
+  
+  <ion-label>No cliente</ion-label>
+  <ion-checkbox color="mafepre" checked="true" [(ngModel)]='sheet.location'></ion-checkbox>
+</ion-item>
+
+
+      
       </ion-col>
-
-      <ion-col class="col" col-12="" col-sm-9="">
-
-        <ion-item class="item item-block item-md item-label-floating item-input ng-untouched ng-pristine ng-valid"><div class="item-inner"><div class="input-wrapper"><ion-label floating="" class="label label-md" id="lbl-522">Morada</ion-label><!--template bindings={}--><ion-input type="text" class="input input-md ng-untouched ng-pristine ng-valid"><!--template bindings={}--><input class="text-input text-input-md ng-untouched ng-pristine ng-valid" type="text" placeholder="" min="undefined" max="undefined" step="undefined" aria-labelledby="lbl-522" autocomplete="off" autocorrect="off"><!--template bindings={}--><!--template bindings={}--><button class="text-input-clear-icon button button-md button-clear button-clear-md" clear="" ion-button="" type="button" hidden=""><span class="button-inner"></span><div class="button-effect"></div></button><!--template bindings={}--></ion-input></div><!--template bindings={}--></div><div class="button-effect"></div></ion-item>
-
-        <ion-item class="noprint item item-block item-md item-label-floating item-input ng-untouched ng-pristine ng-valid"><div class="item-inner"><div class="input-wrapper"><ion-label floating="" class="label label-md" id="lbl-523">Vendedor</ion-label><!--template bindings={}--><ion-input type="text" class="input input-md ng-untouched ng-pristine ng-valid"><!--template bindings={}--><input class="text-input text-input-md ng-untouched ng-pristine ng-valid" type="text" placeholder="" min="undefined" max="undefined" step="undefined" aria-labelledby="lbl-523" autocomplete="off" autocorrect="off"><!--template bindings={}--><!--template bindings={}--><button class="text-input-clear-icon button button-md button-clear button-clear-md" clear="" ion-button="" type="button" hidden=""><span class="button-inner"></span><div class="button-effect"></div></button><!--template bindings={}--></ion-input></div><!--template bindings={}--></div><div class="button-effect"></div></ion-item>
-
-
-      </ion-col>
-      <ion-col class="col" col-12="" col-sm-3="">
-
-
-
-
-
-        <ion-item class="noprint item item-block item-md item-label-floating item-input ng-untouched ng-pristine ng-valid input-has-value"><div class="item-inner"><div class="input-wrapper"><ion-label floating="" class="label label-md" id="lbl-524">Recebido</ion-label><!--template bindings={}--><ion-input clearinput="" type="text" class="input input-md ng-untouched ng-pristine ng-valid"><!--template bindings={}--><input class="text-input text-input-md ng-untouched ng-pristine ng-valid" type="text" placeholder="" min="undefined" max="undefined" step="undefined" aria-labelledby="lbl-524" clearinput="" autocomplete="off" autocorrect="off"><!--template bindings={}--><!--template bindings={}--><button class="text-input-clear-icon button button-md button-clear button-clear-md" clear="" ion-button="" type="button"><span class="button-inner"></span><div class="button-effect"></div></button><!--template bindings={}--></ion-input></div><!--template bindings={}--></div><div class="button-effect"></div></ion-item>
-
-        <ion-item class="item item-block item-md item-label-floating item-input ng-untouched ng-pristine ng-valid input-has-value"><div class="item-inner"><div class="input-wrapper"><ion-label floating="" class="label label-md" id="lbl-525">Data</ion-label><!--template bindings={}--><ion-input clearinput="" type="text" class="input input-md ng-untouched ng-pristine ng-valid"><!--template bindings={}--><input class="text-input text-input-md ng-untouched ng-pristine ng-valid" type="text" placeholder="" min="undefined" max="undefined" step="undefined" aria-labelledby="lbl-525" clearinput="" autocomplete="off" autocorrect="off"><!--template bindings={}--><!--template bindings={}--><button class="text-input-clear-icon button button-md button-clear button-clear-md" clear="" ion-button="" type="button"><span class="button-inner"></span><div class="button-effect"></div></button><!--template bindings={}--></ion-input></div><!--template bindings={}--></div><div class="button-effect"></div></ion-item>
-
-
-
-
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-
-  <ion-grid class="grid">
-    <ion-row class="row">
-      <ion-col class="col" col-12="">
-
-        <!--template bindings={}--><div class="noprint">
-
-          <!--template bindings={}-->
-          <!--template bindings={}--><button block="" color="success" ion-button="" outline="" small="" tappable="" class="button button-md button-outline button-outline-md button-block button-block-md button-small button-small-md button-outline-md-success"><span class="button-inner">Concluido</span><div class="button-effect"></div></button>
-
-
-
-        </div>
-      </ion-col>
-
-    </ion-row>
-  </ion-grid>
+  
+    <ion-col col-12 col-sm-7>
+      <ion-item>
+        <ion-label floating>Vendedor</ion-label>
+        <ion-input type="text" [(ngModel)]="sheet.salesman"></ion-input>
+      </ion-item></ion-col>
+  </ion-row>
+</ion-grid>
 
 
 
@@ -85,77 +97,45 @@
 
 
 
-
-
-  <ion-grid class="grid">
-    <ion-row class="row">
-      <ion-col class="col" col-7="" col-sm-8="">
-        <ion-item class="item item-block item-md item-label-floating item-input ng-untouched ng-pristine ng-valid input-has-value"><div class="item-inner"><div class="input-wrapper"><ion-label floating="" class="label label-md" id="lbl-526">Serviço</ion-label><!--template bindings={}--><ion-input type="text" class="input input-md ng-untouched ng-pristine ng-valid"><!--template bindings={}--><input class="text-input text-input-md ng-untouched ng-pristine ng-valid" type="text" placeholder="" min="undefined" max="undefined" step="undefined" aria-labelledby="lbl-526" autocomplete="off" autocorrect="off"><!--template bindings={}--><!--template bindings={}--><button class="text-input-clear-icon button button-md button-clear button-clear-md" clear="" ion-button="" type="button" hidden=""><span class="button-inner"></span><div class="button-effect"></div></button><!--template bindings={}--></ion-input></div><!--template bindings={}--></div><div class="button-effect"></div></ion-item>
-      </ion-col>
-      <ion-col class="col" col-5="" col-sm-4="">
-
-
-        <ion-item class="item item-block item-md item-checkbox"><ion-checkbox color="mafepre" class="checkbox checkbox-md checkbox-md-mafepre ng-untouched ng-pristine ng-valid" tappable=""><div class="checkbox-icon"><div class="checkbox-inner"></div></div><button class="item-cover item-cover-md item-cover-default item-cover-default-md" ion-button="item-cover" role="checkbox" type="button" id="chk-527-0" aria-checked="false" aria-labelledby="lbl-527" aria-disabled="false"><span class="button-inner"> </span><div class="button-effect"></div></button></ion-checkbox><div class="item-inner"><div class="input-wrapper"><ion-label class="label label-md strike" id="lbl-527">Deslocação</ion-label><!--template bindings={}--></div><!--template bindings={}--></div><div class="button-effect"></div></ion-item>
-
-
-
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-item>
+        <ion-label floating>Serviço</ion-label>
+        <ion-input type="text" [(ngModel)]="sheet.service"></ion-input>
+      </ion-item>
 
 
 
 
 
-  <ion-item class="item item-block item-md item-label-floating item-textarea item-input ng-untouched ng-pristine ng-valid input-has-value"><div class="item-inner"><div class="input-wrapper"><ion-label floating="" class="label label-md" id="lbl-528">Descrição</ion-label><!--template bindings={}--><ion-textarea type="text" class="input input-md ng-untouched ng-pristine ng-valid" rows="5"><!--template bindings={}--><!--template bindings={}--><textarea class="text-input text-input-md ng-untouched ng-pristine ng-valid" placeholder="" aria-labelledby="lbl-528" rows="5" autocomplete="off" autocorrect="off"></textarea><!--template bindings={}--><button class="text-input-clear-icon button button-md button-clear button-clear-md" clear="" ion-button="" type="button" hidden=""><span class="button-inner"></span><div class="button-effect"></div></button><!--template bindings={}--></ion-textarea></div><!--template bindings={}--></div><div class="button-effect"></div></ion-item>
+  <ion-item>
+    <ion-label floating>Descrição</ion-label>
+    <ion-textarea rows="6" type="text" [(ngModel)]="sheet.description"></ion-textarea>
+  </ion-item>
 
-  <ion-item class="item item-block item-md item-label-floating item-textarea item-input ng-untouched ng-pristine ng-valid input-has-value"><div class="item-inner"><div class="input-wrapper"><ion-label floating="" class="label label-md" id="lbl-529">Material Utilizado</ion-label><!--template bindings={}--><ion-textarea type="text" class="input input-md ng-untouched ng-pristine ng-valid" rows="2"><!--template bindings={}--><!--template bindings={}--><textarea class="text-input text-input-md ng-untouched ng-pristine ng-valid" placeholder="" aria-labelledby="lbl-529" rows="2" autocomplete="off" autocorrect="off"></textarea><!--template bindings={}--><button class="text-input-clear-icon button button-md button-clear button-clear-md" clear="" ion-button="" type="button" hidden=""><span class="button-inner"></span><div class="button-effect"></div></button><!--template bindings={}--></ion-textarea></div><!--template bindings={}--></div><div class="button-effect"></div></ion-item>
+   <ion-item>
+    <ion-label floating>Material Utilizado</ion-label>
+    <ion-textarea rows="6" type="text" [(ngModel)]="sheet.material"></ion-textarea>
+  </ion-item>
 
+  <ion-item>
+    <ion-label floating>Mão de obra</ion-label>
+    <ion-input type="text" [(ngModel)]="sheet.handwork"></ion-input>
+  </ion-item>
 
-
-  <ion-grid class="grid">
-    <ion-row class="row">
-      <ion-col class="col" col-8="" col-sm-4="">
-        <ion-item class="item item-block item-md item-label-floating item-input ng-untouched ng-pristine ng-valid"><div class="item-inner"><div class="input-wrapper"><ion-label floating="" class="label label-md" id="lbl-530">Mão de obra</ion-label><!--template bindings={}--><ion-input type="text" class="input input-md ng-untouched ng-pristine ng-valid"><!--template bindings={}--><input class="text-input text-input-md ng-untouched ng-pristine ng-valid" type="text" placeholder="" min="undefined" max="undefined" step="undefined" aria-labelledby="lbl-530" autocomplete="off" autocorrect="off"><!--template bindings={}--><!--template bindings={}--><button class="text-input-clear-icon button button-md button-clear button-clear-md" clear="" ion-button="" type="button" hidden=""><span class="button-inner"></span><div class="button-effect"></div></button><!--template bindings={}--></ion-input></div><!--template bindings={}--></div><div class="button-effect"></div></ion-item>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-
-  <ion-item class="item item-block item-md item-label-floating item-textarea item-input ng-untouched ng-pristine ng-valid input-has-value"><div class="item-inner"><div class="input-wrapper"><ion-label floating="" class="label label-md" id="lbl-531">Observações</ion-label><!--template bindings={}--><ion-textarea type="text" class="input input-md ng-untouched ng-pristine ng-valid" rows="2"><!--template bindings={}--><!--template bindings={}--><textarea class="text-input text-input-md ng-untouched ng-pristine ng-valid" placeholder="" aria-labelledby="lbl-531" rows="2" autocomplete="off" autocorrect="off"></textarea><!--template bindings={}--><button class="text-input-clear-icon button button-md button-clear button-clear-md" clear="" ion-button="" type="button" hidden=""><span class="button-inner"></span><div class="button-effect"></div></button><!--template bindings={}--></ion-textarea></div><!--template bindings={}--></div><div class="button-effect"></div></ion-item>
-
-  <div class="noprint">
-    <ion-item class="item item-block item-md item-label-floating item-textarea item-input ng-untouched ng-pristine ng-valid"><div class="item-inner"><div class="input-wrapper"><ion-label floating="" class="label label-md" id="lbl-532">Notas</ion-label><!--template bindings={}--><ion-textarea type="text" class="input input-md ng-untouched ng-pristine ng-valid" rows="2"><!--template bindings={}--><!--template bindings={}--><textarea class="text-input text-input-md ng-untouched ng-pristine ng-valid" placeholder="" aria-labelledby="lbl-532" rows="2" autocomplete="off" autocorrect="off"></textarea><!--template bindings={}--><button class="text-input-clear-icon button button-md button-clear button-clear-md" clear="" ion-button="" type="button" hidden=""><span class="button-inner"></span><div class="button-effect"></div></button><!--template bindings={}--></ion-textarea></div><!--template bindings={}--></div><div class="button-effect"></div></ion-item>
-  </div>
-
-
-  <br>
-  <br>
-  <br>
-
-  <ion-grid class="grid">
-    <ion-row class="row">
-      <ion-col class="col" col-5="" push-5="">
-
-        <div class="signature"></div>
+  <ion-item>
+    <ion-label floating>Observações</ion-label>
+    <ion-textarea rows="6" type="text" [(ngModel)]="sheet.observations"></ion-textarea>
+  </ion-item>
 
 
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+
+</ion-grid>
 
 
-  <div class="noprint">
 
-    <!--template bindings={}--><div>
+    <div class="noprint">
 
-      <button color="mafepre" full="" ion-button="" tappable="" class="button button-md button-default button-default-md button-full button-full-md button-md-mafepre"><span class="button-inner">Guardar</span><div class="button-effect"></div></button>
+<button full ion-button color="secondary" (click)="updateItem(index)">Guardar</button>
+
     </div>
 
-    <!--template bindings={}-->
-
-  </div>
-
-
-
-</div></ion-content>
+</ion-content>
