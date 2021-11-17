@@ -13,8 +13,22 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  
+<ion-content>
+  <ion-button (click)="onAddNewSheet()">AddNewSheet</ion-button>
+  <ion-list>
+    <ion-list-header>
+      Ionic Lists Example
+    </ion-list-header>
+    <ion-item *ngFor="let sheet of sheets">
+      <ion-label>
+        <h2>
+          {{sheet.client_name}}
+        </h2>
+        <p>
+          {{sheet.description}}
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
