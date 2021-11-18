@@ -17,6 +17,7 @@ export class HomePage {
   ) {}
 
   ionViewDidEnter() {
+    this.backendConnectService.getTocken();
     if (
       !this.backendConnectService.getIsUserAuthenticated().isUserAuthenticated
     ) {

@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Sheet } from '../models/sheet';
 import { environment } from '../../environments/environment';
 
+import { Storage } from '@capacitor/storage';
+
 export interface ResponseAuth {
   idToken: string;
   email: string;
@@ -25,7 +27,20 @@ export class BackendConnectService {
   signinUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.firebaseToken}`;
   databaseUrl = 'https://base-6c464.firebaseio.com/tests.json?auth=';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private storage: Storage) {}
+
+  setToken(userIdToken, expiresIn) {
+    this.storage.set({
+      userIdToken,
+      expiresIn,
+    });
+  }
+
+  getTocken() {
+    console.log(this.storage.get('userIdToken'));
+    //this.userIdToken = response.idToken;
+    //this.storage.get('userIdToken');
+  }
 
   signInWithEmailAndPassword(email: string, password: string) {
     return this.http
@@ -33,6 +48,7 @@ export class BackendConnectService {
       .subscribe((response: ResponseAuth) => {
         this.isUserAuthenticated = true;
         this.userIdToken = response.idToken;
+        this.setToken(response.idToken, response.expiresIn);
       });
   }
 
