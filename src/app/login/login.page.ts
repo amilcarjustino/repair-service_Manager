@@ -17,7 +17,12 @@ export class LoginPage implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(!this.backendConnectService.getIsUserAuthenticated().isUserAuthenticated);
+    if(!this.backendConnectService.getIsUserAuthenticated().isUserAuthenticated){
+      this.router.navigateByUrl('/');
+    }
+  }
 
   onSwitchAuthMode() {
     this.isLoginMode = !this.isLoginMode;

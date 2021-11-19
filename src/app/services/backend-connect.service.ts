@@ -27,19 +27,23 @@ export class BackendConnectService {
   signinUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.firebaseToken}`;
   databaseUrl = 'https://base-6c464.firebaseio.com/tests.json?auth=';
 
-  constructor(private http: HttpClient, private storage: Storage) {}
+  constructor(private http: HttpClient) {}
 
   setToken(userIdToken, expiresIn) {
-    this.storage.set({
-      userIdToken,
-      expiresIn,
+    Storage.set({
+      key: 'userIdToken',
+      value: userIdToken,
     });
   }
 
   getTocken() {
-    console.log(this.storage.get('userIdToken'));
+    return Storage.get({ key: 'userIdToken' }).then((data) => {
+      this.isUserAuthenticated = true;
+      console.log(this.isUserAuthenticated);
+      console.log(data);
+    });
     //this.userIdToken = response.idToken;
-    //this.storage.get('userIdToken');
+    //Storage.get('userIdToken');
   }
 
   signInWithEmailAndPassword(email: string, password: string) {

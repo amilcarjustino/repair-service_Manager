@@ -17,18 +17,22 @@ export class HomePage {
   ) {}
 
   ionViewDidEnter() {
-    this.backendConnectService.getTocken();
-    if (
-      !this.backendConnectService.getIsUserAuthenticated().isUserAuthenticated
-    ) {
+
+    this.backendConnectService.getTocken().then(()=>{
+
+      console.log(this.backendConnectService.getIsUserAuthenticated().isUserAuthenticated);
+      if (
+        !this.backendConnectService.getIsUserAuthenticated().isUserAuthenticated
+        ) {
       this.router.navigate(['login']);
     } else {
       const userIdToken =
         this.backendConnectService.getIsUserAuthenticated().userIdToken;
-      // console.log('did get here with token: ', userIdToken);
-      this.getListOfObjectFromServer(userIdToken);
+        // console.log('did get here with token: ', userIdToken);
+        this.getListOfObjectFromServer(userIdToken);
+      }
+    });
     }
-  }
 
   getListOfObjectFromServer(idToken) {
     this.backendConnectService.getList(idToken).subscribe((data) => {
@@ -38,6 +42,7 @@ export class HomePage {
   }
 
   onAddNewSheet() {
+    this.router.navigateByUrl('new-sheet');
     const sheet: Sheet = {
       id: 'test',
       customer: { name: 'Reader' },

@@ -19,6 +19,9 @@ export interface Sheet {
   product: string;
   isDone: boolean;
   description: string;
+  observations?: string;
+  notes?: string;
+  creationDate?: Date;
   initialDate: Date;
   finalizedDate: Date;
 }

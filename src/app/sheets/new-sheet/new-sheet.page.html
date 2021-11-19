@@ -6,15 +6,6 @@
 
 <ion-content>
 
-
-
-
-
-
-
-
-
-
   <ion-grid>
   <ion-row align-items-center>
     <ion-col col-12 col-sm-6>
@@ -33,8 +24,8 @@
 
 <div class="noprint">
 
-  <button ion-button block color="danger" (click)="toggleDone()" *ngIf="!sheet.done">Não Concluido</button>
-  <button ion-button block color="success" (click)="toggleDone()" *ngIf="sheet.done">Concluido</button>
+  <button ion-button block color="danger" (click)="toggleDone()" *ngIf="!sheet.isDone">Não Concluido</button>
+  <button ion-button block color="success" (click)="toggleDone()" *ngIf="sheet.isDone">Concluido</button>
 
 </div>
 
@@ -45,22 +36,22 @@
     <ion-col col-12 col-sm-6>
       <ion-item>
         <ion-label floating>Cliente</ion-label>
-        <ion-input type="text" [(ngModel)]="sheet.client_name"></ion-input>
+        <ion-input type="text" [(ngModel)]="sheet.customer.name"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Morada</ion-label>
-        <ion-input type="text" [(ngModel)]="sheet.client_address"></ion-input>
+        <ion-input type="text" [(ngModel)]="sheet.customer.address"></ion-input>
       </ion-item>
       </ion-col>
     <ion-col col-12 col-sm-6>
       <ion-item>
         <ion-label floating>Data Inicio</ion-label>
-        <ion-input type="text" [(ngModel)]="sheet.start_date" clearInput></ion-input>
+        <ion-input type="text" [(ngModel)]="sheet.initialDate" clearInput></ion-input>
       </ion-item>
 
        <ion-item>
         <ion-label floating>Data de Fim</ion-label>
-        <ion-input type="text" [(ngModel)]="sheet.end_date" clearInput></ion-input>
+        <ion-input type="text" [(ngModel)]="sheet.finalizedDate" clearInput></ion-input>
       </ion-item>
       </ion-col>
   </ion-row>
@@ -74,7 +65,7 @@
 <ion-item>
   
   <ion-label>No cliente</ion-label>
-  <ion-checkbox color="mafepre" checked="true" [(ngModel)]='sheet.location'></ion-checkbox>
+  <ion-checkbox color="mafepre" checked="true" [(ngModel)]='sheet.customer.location'></ion-checkbox>
 </ion-item>
 
 
@@ -84,7 +75,7 @@
     <ion-col col-12 col-sm-7>
       <ion-item>
         <ion-label floating>Vendedor</ion-label>
-        <ion-input type="text" [(ngModel)]="sheet.salesman"></ion-input>
+        <ion-input type="text" [(ngModel)]="sheet.customer.salesman"></ion-input>
       </ion-item></ion-col>
   </ion-row>
 </ion-grid>
@@ -99,7 +90,7 @@
 
 <ion-item>
         <ion-label floating>Serviço</ion-label>
-        <ion-input type="text" [(ngModel)]="sheet.service"></ion-input>
+        <ion-input type="text" [(ngModel)]="sheet.serviceType"></ion-input>
       </ion-item>
 
 
@@ -111,15 +102,15 @@
     <ion-textarea rows="6" type="text" [(ngModel)]="sheet.description"></ion-textarea>
   </ion-item>
 
-   <ion-item>
+   <!-- <ion-item>
     <ion-label floating>Material Utilizado</ion-label>
     <ion-textarea rows="6" type="text" [(ngModel)]="sheet.material"></ion-textarea>
-  </ion-item>
+  </ion-item> -->
 
-  <ion-item>
+  <!-- <ion-item>
     <ion-label floating>Mão de obra</ion-label>
     <ion-input type="text" [(ngModel)]="sheet.handwork"></ion-input>
-  </ion-item>
+  </ion-item> -->
 
   <ion-item>
     <ion-label floating>Observações</ion-label>
