@@ -9,6 +9,7 @@ import { Sheet } from 'src/app/models/sheet';
 export class NewSheetPage implements OnInit {
   sheet: Sheet = {
     id: '',
+    executedOnTheCustomer: false,
     customer: { name: '' },
     serviceType: 'Repair',
     costEstimation: { isRequired: false },
@@ -17,6 +18,7 @@ export class NewSheetPage implements OnInit {
     description:'',
     observations:'',
     creationDate: new Date(),
+    receivedDate: new Date(),
     initialDate: new Date(),
     finalizedDate: new Date()
   };

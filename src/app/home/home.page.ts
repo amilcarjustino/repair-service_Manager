@@ -14,25 +14,26 @@ export class HomePage {
   constructor(
     private backendConnectService: BackendConnectService,
     private router: Router
-  ) {}
+  ) { }
 
-  ionViewDidEnter() {
+  ionViewDidEnter() {}
 
-    this.backendConnectService.getTocken().then(()=>{
+  myInit() {
+    this.backendConnectService.getTocken().then(() => {
 
       console.log(this.backendConnectService.getIsUserAuthenticated().isUserAuthenticated);
       if (
         !this.backendConnectService.getIsUserAuthenticated().isUserAuthenticated
-        ) {
-      this.router.navigate(['login']);
-    } else {
-      const userIdToken =
-        this.backendConnectService.getIsUserAuthenticated().userIdToken;
+      ) {
+        this.router.navigate(['login']);
+      } else {
+        const userIdToken =
+          this.backendConnectService.getIsUserAuthenticated().userIdToken;
         // console.log('did get here with token: ', userIdToken);
         this.getListOfObjectFromServer(userIdToken);
       }
     });
-    }
+  }
 
   getListOfObjectFromServer(idToken) {
     this.backendConnectService.getList(idToken).subscribe((data) => {

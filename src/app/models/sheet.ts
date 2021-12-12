@@ -13,6 +13,7 @@ interface CostEstimation {
 
 export interface Sheet {
   id: string;
+  executedOnTheCustomer: boolean;
   customer: Customer;
   serviceType: 'Repair' | 'Assistance';
   costEstimation: CostEstimation;
@@ -21,7 +22,8 @@ export interface Sheet {
   description: string;
   observations?: string;
   notes?: string;
-  creationDate?: Date;
+  creationDate: Date;
+  receivedDate: Date;
   initialDate: Date;
   finalizedDate: Date;
 }
