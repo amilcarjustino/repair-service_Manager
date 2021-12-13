@@ -46,12 +46,15 @@ export class HomePage {
     this.router.navigateByUrl('new-sheet');
     const sheet: Sheet = {
       id: 'test',
+      executedOnTheCustomer: false,
       customer: { name: 'Reader' },
       serviceType: 'Repair',
       costEstimation: { isRequired: false },
       product: 'Machine',
       isDone: false,
       description: 'Nothing',
+      creationDate: new Date(),
+      receivedDate: new Date(),
       initialDate: new Date(),
       finalizedDate: new Date(),
     };

@@ -1,10 +1,21 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button href="/">
+        <ion-icon slot="icon-only" name="home"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-title>New Sheet Creation Page</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button color="secondary">
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
 
   <ion-grid>
     <ion-row align-items-center>
@@ -14,74 +25,93 @@
       </ion-col>
       <ion-col size=3>
         <img item-right
-          src="https://firebasestorage.googleapis.com/v0/b/base-6c464.appspot.com/o/logo_mafepre.png?alt=media&token=0d2584bf-d3c8-4333-b98f-8d3bbd6c4d60">
+        src="https://firebasestorage.googleapis.com/v0/b/base-6c464.appspot.com/o/logo_mafepre.png?alt=media&token=0d2584bf-d3c8-4333-b98f-8d3bbd6c4d60">
       </ion-col>
     </ion-row>
-    <!--  <div class="noprint">
+  </ion-grid>
+
+
+
+
+
+  <ion-card>
+    <ion-card-content>
+      <!--  <div class="noprint">
     <ion-button block color="danger" (click)="toggleDone()" *ngIf="!sheet.isDone">Não Concluido</ion-button>
     <ion-button block color="success" (click)="toggleDone()" *ngIf="sheet.isDone">Concluido</ion-button>
   </div> -->
-    <ion-row>
-      <ion-col size="12" size-md="9">
-        <ion-item>
-          <ion-label floating>Cliente</ion-label>
-          <ion-input type="text" [(ngModel)]="sheet.customer.name"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating>Morada</ion-label>
-          <ion-input type="text" [(ngModel)]="sheet.customer.address"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating>Salesman</ion-label>
-          <ion-input type="text" [(ngModel)]="sheet.customer.salesman"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col size="12" size-md="3">
-        <ion-item>
-          <ion-label floating>Received Date</ion-label>
-          <ion-input type="text" [(ngModel)]="sheet.receivedDate" clearInput></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating>Starting Date</ion-label>
-          <ion-input type="text" [(ngModel)]="sheet.initialDate" clearInput></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating>Finalized Date</ion-label>
-          <ion-input type="text" [(ngModel)]="sheet.finalizedDate" clearInput></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12" size-md="9">
-        <ion-item>
-          <ion-label floating>ServiceType</ion-label>
-          <ion-input type="text" [(ngModel)]="sheet.serviceType"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col size="12" size-md="3">
-        <ion-item>
-          <ion-label>Executed on the customer?</ion-label>
-          <ion-checkbox color="mafepre" checked="true" [(ngModel)]='sheet.executedOnTheCustomer'></ion-checkbox>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12" size-md="9">
-        <ion-item>
-          <ion-label floating>Product</ion-label>
-          <ion-input type="text" [(ngModel)]="sheet.product"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label floating>Descrição</ion-label>
-          <ion-textarea rows="6" type="text" [(ngModel)]="sheet.description"></ion-textarea>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <!-- <ion-item>
+      <ion-grid>
+
+        <ion-row>
+          <ion-col size="12" size-md="9">
+            <ion-item>
+              <ion-label floating>Cliente</ion-label>
+              <ion-input type="text" [(ngModel)]="sheet.customer.name"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Morada</ion-label>
+              <ion-input type="text" [(ngModel)]="sheet.customer.address"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Salesman</ion-label>
+              <ion-input type="text" [(ngModel)]="sheet.customer.salesman"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" size-md="3">
+            <ion-item>
+              <ion-input type="text" [(ngModel)]="sheet.receivedDate" placeholder="Received Date" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="text" [(ngModel)]="sheet.initialDate" placeholder="Starting Date" clearInput></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="text" [(ngModel)]="sheet.finalizedDate" placeholder="Finalized Date" clearInput></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-card-content>
+  </ion-card>
+
+
+
+
+
+  <ion-card>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" size-md="9">
+            <ion-item>
+              <ion-label floating>ServiceType</ion-label>
+              <ion-input type="text" [(ngModel)]="sheet.serviceType"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="12" size-md="3">
+            <ion-item>
+              <ion-label>Executed on the customer?</ion-label>
+              <ion-checkbox color="mafepre" checked="true" [(ngModel)]='sheet.executedOnTheCustomer'></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label floating>Product</ion-label>
+              <ion-input type="text" [(ngModel)]="sheet.product"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label floating>Descrição</ion-label>
+              <ion-textarea rows="6" type="text" [(ngModel)]="sheet.description"></ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <!-- <ion-item>
     <ion-label floating>Material Utilizado</ion-label>
     <ion-textarea rows="6" type="text" [(ngModel)]="sheet.material"></ion-textarea>
   </ion-item>
@@ -89,22 +119,23 @@
     <ion-label floating>Mão de obra</ion-label>
     <ion-input type="text" [(ngModel)]="sheet.handwork"></ion-input>
   </ion-item> -->
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label floating>Observações</ion-label>
-          <ion-textarea rows="6" type="text" [(ngModel)]="sheet.observations"></ion-textarea>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label floating>Observações</ion-label>
+              <ion-textarea rows="6" type="text" [(ngModel)]="sheet.observations"></ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
-
+    </ion-card-content>
+  </ion-card>
 
   <div class="noprint">
-
-    <button full ion-button color="secondary" (click)="updateItem(index)">Guardar</button>
-
+    <ion-button expand="block" color="primary">Guardar</ion-button>
   </div>
+
+
 
 </ion-content>
