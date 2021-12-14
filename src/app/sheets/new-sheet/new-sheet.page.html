@@ -53,7 +53,7 @@
               <ion-input type="text" [(ngModel)]="sheet.customer.address"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label position="floating">>Salesman</ion-label>
+              <ion-label position="floating">Salesman</ion-label>
               <ion-input type="text" [(ngModel)]="sheet.customer.salesman"></ion-input>
             </ion-item>
           </ion-col>
@@ -82,24 +82,37 @@
     <ion-card-content>
       <ion-grid>
         <ion-row>
-          <ion-col size="12" size-md="9">
+          <ion-col size="12" size-md="2">
             <ion-item>
-              <ion-label position="floating">ServiceType</ion-label>
-              <ion-input type="text" [(ngModel)]="sheet.serviceType"></ion-input>
+              <ion-label position="floating">ServiceType
+                <ion-icon name="build-outline" *ngIf="sheet.serviceType === 'Repair'"></ion-icon>
+                <ion-icon name="construct-outline" *ngIf="sheet.serviceType === 'Assistance'"></ion-icon>
+              </ion-label>
+              <ion-select [(ngModel)]="sheet.serviceType">
+                <ion-select-option value="Repair">Repair</ion-select-option>
+                <ion-select-option value="Assistance">Assistance</ion-select-option>
+              </ion-select>
+            </ion-item>
+           
+          </ion-col>
+          <ion-col size="12" size-md="8">
+            <ion-item>
+              <ion-label position="floating">Product</ion-label>
+              <ion-input type="text" [(ngModel)]="sheet.product"></ion-input>
             </ion-item>
           </ion-col>
-          <ion-col size="12" size-md="3">
+          <ion-col size="12" size-md="2">
             <ion-item>
-              <ion-label>Executed on the customer?</ion-label>
-              <ion-checkbox color="mafepre" checked="true" [(ngModel)]='sheet.executedOnTheCustomer'></ion-checkbox>
+              <ion-label>At the customer?</ion-label>
+              <ion-checkbox color="mafepre" checked="true" [(ngModel)]='sheet.executedAtTheCustomer'></ion-checkbox>
             </ion-item>
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col>
+          <ion-col size="12" size-md="4">
             <ion-item>
-              <ion-label position="floating">Product</ion-label>
-              <ion-input type="text" [(ngModel)]="sheet.product"></ion-input>
+              <ion-label>Cost estimation?</ion-label>
+              <ion-checkbox slot="end" [(ngModel)]="sheet.costEstimation.isRequired"></ion-checkbox>
             </ion-item>
           </ion-col>
         </ion-row>

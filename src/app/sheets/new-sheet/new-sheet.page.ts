@@ -9,7 +9,7 @@ import { Sheet } from 'src/app/models/sheet';
 export class NewSheetPage implements OnInit {
   sheet: Sheet = {
     id: '',
-    executedOnTheCustomer: false,
+    executedAtTheCustomer: false,
     customer: { name: '' },
     serviceType: 'Repair',
     costEstimation: { isRequired: false },
