@@ -11,6 +11,13 @@ interface CostEstimation {
   value?: number;
 }
 
+interface PartList {
+  id: string;
+  name: string;
+  qtd: number;
+  description: string;
+}
+
 export interface Sheet {
   id: string;
   executedAtTheCustomer: boolean;
@@ -20,6 +27,7 @@ export interface Sheet {
   product: string;
   isDone: boolean;
   description: string;
+  partsListApplied?: PartList[];
   observations?: string;
   notes?: string;
   creationDate: Date;

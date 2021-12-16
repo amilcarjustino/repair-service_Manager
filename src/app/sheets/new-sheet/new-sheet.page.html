@@ -25,7 +25,7 @@
       </ion-col>
       <ion-col size=3>
         <img item-right
-        src="https://firebasestorage.googleapis.com/v0/b/base-6c464.appspot.com/o/logo_mafepre.png?alt=media&token=0d2584bf-d3c8-4333-b98f-8d3bbd6c4d60">
+          src="https://firebasestorage.googleapis.com/v0/b/base-6c464.appspot.com/o/logo_mafepre.png?alt=media&token=0d2584bf-d3c8-4333-b98f-8d3bbd6c4d60">
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -59,13 +59,15 @@
           </ion-col>
           <ion-col size="12" size-md="3">
             <ion-item>
-              <ion-input type="text" [(ngModel)]="sheet.receivedDate" placeholder="Received Date" clearInput></ion-input>
+              <ion-input type="text" [(ngModel)]="sheet.receivedDate" placeholder="Received Date" clearInput>
+              </ion-input>
             </ion-item>
             <ion-item>
               <ion-input type="text" [(ngModel)]="sheet.initialDate" placeholder="Starting Date" clearInput></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input type="text" [(ngModel)]="sheet.finalizedDate" placeholder="Finalized Date" clearInput></ion-input>
+              <ion-input type="text" [(ngModel)]="sheet.finalizedDate" placeholder="Finalized Date" clearInput>
+              </ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -93,7 +95,7 @@
                 <ion-select-option value="Assistance">Assistance</ion-select-option>
               </ion-select>
             </ion-item>
-           
+
           </ion-col>
           <ion-col size="12" size-md="8">
             <ion-item>
@@ -109,34 +111,35 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col size="12" size-md="4">
+          <ion-col size="12" size-md="2">
             <ion-item>
-              <ion-label>Cost estimation?</ion-label>
               <ion-checkbox slot="end" [(ngModel)]="sheet.costEstimation.isRequired"></ion-checkbox>
+              <ion-label>Repair Budget</ion-label>
             </ion-item>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label position="floating">Descrição</ion-label>
-              <ion-textarea rows="6" type="text" [(ngModel)]="sheet.description"></ion-textarea>
+              <ion-label position="floating">Description</ion-label>
+              <ion-textarea rows="2" type="text" [(ngModel)]="sheet.description"></ion-textarea>
             </ion-item>
           </ion-col>
         </ion-row>
-        <!-- <ion-item>
-    <ion-label floating>Material Utilizado</ion-label>
-    <ion-textarea rows="6" type="text" [(ngModel)]="sheet.material"></ion-textarea>
-  </ion-item>
-  <ion-item>
-    <ion-label floating>Mão de obra</ion-label>
-    <ion-input type="text" [(ngModel)]="sheet.handwork"></ion-input>
-  </ion-item> -->
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating" *ngIf="!sheet.costEstimation.isRequired">Parts applied</ion-label>
+              <ion-label position="floating" *ngIf="sheet.costEstimation.isRequired">Parts to apply</ion-label>
+              <ion-textarea rows="6" type="text" [(ngModel)]="sheet.partsListApplied"></ion-textarea>
+            </ion-item>
+          </ion-col>
+        </ion-row>
         <ion-row>
           <ion-col>
             <ion-item>
               <ion-label floating>Observações</ion-label>
-              <ion-textarea rows="6" type="text" [(ngModel)]="sheet.observations"></ion-textarea>
+              <ion-textarea rows="2" type="text" [(ngModel)]="sheet.observations"></ion-textarea>
             </ion-item>
           </ion-col>
         </ion-row>

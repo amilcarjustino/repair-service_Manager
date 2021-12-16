@@ -16,6 +16,7 @@ export class NewSheetPage implements OnInit {
     isDone: false,
     product: '',
     description:'',
+    partsListApplied:[],
     observations:'',
     creationDate: new Date(),
     receivedDate: new Date(),
