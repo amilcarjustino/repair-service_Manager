@@ -50,7 +50,7 @@ export class HomePage {
       customer: { name: 'Reader' },
       serviceType: 'Repair',
       costEstimation: { isRequired: false },
-      product: 'Machine',
+      product: {brand:'', model:''},
       isDone: false,
       description: 'Nothing',
       creationDate: new Date(),

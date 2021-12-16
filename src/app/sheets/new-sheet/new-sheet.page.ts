@@ -14,7 +14,7 @@ export class NewSheetPage implements OnInit {
     serviceType: 'Repair',
     costEstimation: { isRequired: false },
     isDone: false,
-    product: '',
+    product: {brand: '', model:''},
     description:'',
     partsListApplied:[],
     observations:'',

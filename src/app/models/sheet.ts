@@ -18,13 +18,18 @@ interface PartList {
   description: string;
 }
 
+interface Product{
+  brand: string;
+  model: string;
+}
+
 export interface Sheet {
   id: string;
   executedAtTheCustomer: boolean;
   customer: Customer;
   serviceType: 'Repair' | 'Assistance';
   costEstimation: CostEstimation;
-  product: string;
+  product: Product;
   isDone: boolean;
   description: string;
   partsListApplied?: PartList[];
