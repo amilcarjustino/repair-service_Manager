@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { Sheet } from '../models/sheet';
 import { environment } from '../../environments/environment';
 
-import { Storage } from '@capacitor/storage';
+//import { Storage } from '@capacitor/storage';
+//import { Storage } from '@awesome-cordova-plugins/native-storage/ngx';
+
 
 export interface ResponseAuth {
   idToken: string;
@@ -30,18 +32,18 @@ export class BackendConnectService {
   constructor(private http: HttpClient) {}
 
   setToken(userIdToken, expiresIn) {
-    Storage.set({
+   /*  Storage.set({
       key: 'userIdToken',
       value: userIdToken,
-    });
+    }); */
   }
 
   getTocken() {
-    return Storage.get({ key: 'userIdToken' }).then((data) => {
+   /*  return Storage.get({ key: 'userIdToken' }).then((data) => {
       this.isUserAuthenticated = true;
       console.log(this.isUserAuthenticated);
       console.log(data);
-    });
+    }); */
     //this.userIdToken = response.idToken;
     //Storage.get('userIdToken');
   }

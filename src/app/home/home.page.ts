@@ -19,7 +19,7 @@ export class HomePage {
   ionViewDidEnter() {}
 
   myInit() {
-    this.backendConnectService.getTocken().then(() => {
+  /*   this.backendConnectService.getTocken().then(() => {
 
       console.log(this.backendConnectService.getIsUserAuthenticated().isUserAuthenticated);
       if (
@@ -32,7 +32,7 @@ export class HomePage {
         // console.log('did get here with token: ', userIdToken);
         this.getListOfObjectFromServer(userIdToken);
       }
-    });
+    }); */
   }
 
   getListOfObjectFromServer(idToken) {
