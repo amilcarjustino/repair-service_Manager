@@ -19,9 +19,9 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     console.log(!this.backendConnectService.getIsUserAuthenticated().isUserAuthenticated);
-    if(!this.backendConnectService.getIsUserAuthenticated().isUserAuthenticated){
+    /* if(!this.backendConnectService.getIsUserAuthenticated().isUserAuthenticated){
       this.router.navigateByUrl('/');
-    }
+    } */
   }
 
   onSwitchAuthMode() {
@@ -38,11 +38,12 @@ export class LoginPage implements OnInit {
   }
 
   authenticate(email: string, password: string) {
-    this.backendConnectService.signInWithEmailAndPassword(
+    const result = this.backendConnectService.signInWithEmailAndPassword(
       email,
       password
     );
-    this.router.navigate(['/']);
+    console.log(result);
+    //this.router.navigate(['/']);
     /*
     console.log('email: ', email);
     console.log('password: ', password);
