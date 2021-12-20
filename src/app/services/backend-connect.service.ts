@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 
 //import { Storage } from '@capacitor/storage';
 //import { Storage } from '@awesome-cordova-plugins/native-storage/ngx';
+import { Storage } from '@ionic/storage-angular';
 
 
 export interface ResponseAuth {
@@ -29,21 +30,21 @@ export class BackendConnectService {
   signinUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.firebaseToken}`;
   databaseUrl = 'https://base-6c464.firebaseio.com/tests.json?auth=';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private storage: Storage) { }
 
   setToken(userIdToken, expiresIn) {
-   /*  Storage.set({
-      key: 'userIdToken',
-      value: userIdToken,
-    }); */
+    /*  Storage.set({
+       key: 'userIdToken',
+       value: userIdToken,
+     }); */
   }
 
   getTocken() {
-   /*  return Storage.get({ key: 'userIdToken' }).then((data) => {
-      this.isUserAuthenticated = true;
-      console.log(this.isUserAuthenticated);
-      console.log(data);
-    }); */
+    /*  return Storage.get({ key: 'userIdToken' }).then((data) => {
+       this.isUserAuthenticated = true;
+       console.log(this.isUserAuthenticated);
+       console.log(data);
+     }); */
     //this.userIdToken = response.idToken;
     //Storage.get('userIdToken');
   }
@@ -54,6 +55,7 @@ export class BackendConnectService {
       .subscribe((response: ResponseAuth) => {
         this.isUserAuthenticated = true;
         this.userIdToken = response.idToken;
+        console.log(this.userIdToken);
         this.setToken(response.idToken, response.expiresIn);
       });
   }
@@ -90,7 +92,8 @@ export class BackendConnectService {
 
   addNewSheet(sheet: Sheet) {
     console.log(environment.accessToken);
-    this.http.post(this.databaseUrl, sheet).subscribe(
+    console.log(this.userIdToken);
+    this.http.post(this.databaseUrl + this.userIdToken, sheet).subscribe(
       (data) => {
         console.log(data);
       },
