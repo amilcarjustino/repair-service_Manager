@@ -29,14 +29,25 @@ export class BackendConnectService {
   userInfo;
   signinUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.firebaseToken}`;
   databaseUrl = 'https://base-6c464.firebaseio.com/tests.json?auth=';
+  private userStorage: Storage | null = null;
 
-  constructor(private http: HttpClient, private storage: Storage) { }
+  constructor(private http: HttpClient, private storage: Storage) {
+    this.init();
+  }
+
+  async init() {
+    const storage = await this.storage.create();
+    this.userStorage = storage;
+  }
+
+  // Create and expose methods that users of this service can
+  // call, for example:
+  public set(key: string, value: any) {
+    this.userStorage?.set(key, value);
+  }
 
   setToken(userIdToken, expiresIn) {
-    /*  Storage.set({
-       key: 'userIdToken',
-       value: userIdToken,
-     }); */
+    this.set('userIdToken', userIdToken);
   }
 
   getTocken() {
