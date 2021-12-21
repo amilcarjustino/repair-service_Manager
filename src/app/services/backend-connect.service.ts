@@ -47,7 +47,9 @@ export class BackendConnectService {
   }
 
   setToken(userIdToken, expiresIn) {
-    this.set('userIdToken', userIdToken);
+    //this.set('userIdToken', userIdToken);
+    this.storage.set('userIdToken', userIdToken);
+    this.storage.set('expiresIn', expiresIn);
   }
 
   getTocken() {
@@ -58,7 +60,12 @@ export class BackendConnectService {
      }); */
     //this.userIdToken = response.idToken;
     //Storage.get('userIdToken');
+    const name = this.storage.get('userIdToken');
   }
+
+  /*
+   https://github.com/ionic-team/ionic-storage#api  
+  */
 
   signInWithEmailAndPassword(email: string, password: string) {
     return this.http
