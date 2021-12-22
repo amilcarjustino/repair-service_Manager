@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   firebaseConfig:{
-    webApiKey:'AIzaSyA_3xAldg85ureI2HUMXDlOlCCEX-GdUEQ'
+    webApiKey:'AIzaSyA_3xAldg85ureI2HUMXDlOlCCEX-GdUEQ',
+    signinUrl : 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=',
   },
   accessToken : 'cmQjukE6sywF05epJmCu0x19FdsSxekDORQsmEEU'
 };

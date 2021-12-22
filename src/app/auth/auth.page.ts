@@ -1,51 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BackendConnectService, ResponseAuth } from '../services/backend-connect.service';
-import { HttpResponseData } from '../models/HttpResponseData';
+import {
+  BackendConnectService,
+  ResponseAuth,
+} from '../services/backend-connect.service';
+import { AuthResponseData } from '../models/AuthResponseData';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'app-auth',
+  templateUrl: './auth.page.html',
+  styleUrls: ['./auth.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class AuthPage implements OnInit {
   isLoginMode = true;
 
-  constructor(
-    private backendConnectService: BackendConnectService,
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit() {
-    //console.log(!this.backendConnectService.getIsUserAuthenticated().isUserAuthenticated);
-    /* if(!this.backendConnectService.getIsUserAuthenticated().isUserAuthenticated){
-      this.router.navigateByUrl('/');
-    } */
-  }
-
-  onSwitchAuthMode() {
-    this.isLoginMode = !this.isLoginMode;
-  }
+  ngOnInit() {}
 
   onSubmit(form: NgForm) {
     if (!form.valid) {
       return;
     }
-    this.authService.login();
-    this.router.navigateByUrl('/home');
     const email = form.value.email;
     const password = form.value.password;
-    // this.authenticate(email, password);
+    this.authenticate(email, password);
+    form.reset();
   }
 
   authenticate(email: string, password: string) {
-    const result = this.backendConnectService.signInWithEmailAndPassword(
+    const result = this.authService.signInWithEmailAndPassword(
       email,
       password
-    );
+    ).subscribe((data)=>console.log(data));
     console.log(result);
     //this.router.navigate(['/']);
     /*
@@ -66,5 +55,9 @@ export class LoginPage implements OnInit {
       });
     }
   } */
-}
+  }
+
+  onSwitchAuthMode() {
+    this.isLoginMode = !this.isLoginMode;
+  }
 }

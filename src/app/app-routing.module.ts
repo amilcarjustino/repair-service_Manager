@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -11,15 +11,17 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'home',
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canLoad: [AuthGuard]
   },
   {
-    path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    path: 'auth',
+    loadChildren: () => import('./auth/auth.module').then( m => m.AuthPageModule)
   },
   {
     path: 'new-sheet',
-    loadChildren: () => import('./sheets/new-sheet/new-sheet.module').then( m => m.NewSheetPageModule)
+    loadChildren: () => import('./sheets/new-sheet/new-sheet.module').then( m => m.NewSheetPageModule),
+    canLoad: [AuthGuard]
   },
 ];
 

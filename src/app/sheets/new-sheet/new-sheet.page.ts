@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Sheet } from 'src/app/models/sheet';
+import { Sheet } from 'src/app/models/Sheet';
 import { BackendConnectService } from 'src/app/services/backend-connect.service';
 import { Router } from '@angular/router';
 

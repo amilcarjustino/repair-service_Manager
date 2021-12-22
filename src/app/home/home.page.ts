@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BackendConnectService } from '../services/backend-connect.service';
-import { Sheet } from '../models/sheet';
-import { HttpResponseData } from '../models/HttpResponseData';
+import { Sheet } from '../models/Sheet';
 
 @Component({
   selector: 'app-home',

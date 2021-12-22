@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Sheet } from '../models/sheet';
+import { Sheet } from '../models/Sheet';
 import { environment } from '../../environments/environment';
 
 //import { Storage } from '@capacitor/storage';
@@ -23,11 +23,9 @@ export interface ResponseAuth {
 export class BackendConnectService {
   isUserAuthenticated = false;
   userIdToken = '';
-  firebaseToken = environment.firebaseConfig.webApiKey;
   refreshToken = '';
   expiresIn = '';
   userInfo;
-  signinUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.firebaseToken}`;
   databaseUrl = 'https://base-6c464.firebaseio.com/tests.json?auth=';
   private userStorage: Storage | null = null;
 
@@ -67,16 +65,7 @@ export class BackendConnectService {
    https://github.com/ionic-team/ionic-storage#api  
   */
 
-  signInWithEmailAndPassword(email: string, password: string) {
-    return this.http
-      .post(this.signinUrl, { email, password, returnSecureToken: true })
-      .subscribe((response: ResponseAuth) => {
-        this.isUserAuthenticated = true;
-        this.userIdToken = response.idToken;
-        console.log(this.userIdToken);
-        this.setToken(response.idToken, response.expiresIn);
-      });
-  }
+  
 
   getList(userIdToken) {
     return this.http.get(this.databaseUrl + this.userIdToken);
