@@ -27,7 +27,7 @@ export class AuthPage implements OnInit {
     const email = form.value.email;
     const password = form.value.password;
     this.authenticate(email, password);
-    form.reset();
+    //form.reset();
   }
 
   authenticate(email: string, password: string) {
@@ -59,5 +59,10 @@ export class AuthPage implements OnInit {
 
   onSwitchAuthMode() {
     this.isLoginMode = !this.isLoginMode;
+  }
+
+  testButton(){
+    const isAuth = this.authService.userIsAuthenticated.subscribe((isAuth)=> isAuth)
+    console.log('Hello test isAuth is: ',isAuth);
   }
 }

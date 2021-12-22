@@ -13,10 +13,13 @@ export class AuthService {
   webApiKey = environment.firebaseConfig.webApiKey;
   signinUrl = environment.firebaseConfig.signinUrl;
   #user = new BehaviorSubject<User>(null);
+  kk = new BehaviorSubject(null);
+
 
   constructor(private http: HttpClient) {}
-
   get userIsAuthenticated() {
+    this.kk.subscribe(val=>console.log(val));
+    this.#user.subscribe(val=>console.log(val));
     return this.#user.pipe(
       map((user) => {
         if (user) {
@@ -46,10 +49,12 @@ export class AuthService {
         email,
         password,
         returnSecureToken: true,
-      });
-    // .pipe(tap(this.setUserData.bind(this)));
+      })
+    .pipe(tap(this.setUserData.bind(this)));
   }
-  setUserData(authData: AuthResponseData) {}
+  setUserData(authData: AuthResponseData) {
+    console.log(authData);
+  }
 
   logout() {
     // this.#userIsAuthenticated = true;
