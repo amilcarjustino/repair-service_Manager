@@ -6,13 +6,21 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  
+  #userIsAuthenticated = false;
 
-  constructor(private http: HttpClient) {}
+  constructor() { }
 
+  login() {
+    this.#userIsAuthenticated = true;
+    console.log(this.#userIsAuthenticated);
+  }
 
+  logout() {
+    this.#userIsAuthenticated = true;
+  }
 
-  signOut() {}
+  get userIsAuthenticated(){
+    return this.#userIsAuthenticated;
+  }
 
-  userDetails() {}
 }

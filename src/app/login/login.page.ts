@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BackendConnectService, ResponseAuth } from '../services/backend-connect.service';
 import { HttpResponseData } from '../models/HttpResponseData';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,11 +15,12 @@ export class LoginPage implements OnInit {
 
   constructor(
     private backendConnectService: BackendConnectService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
   ngOnInit() {
-    console.log(!this.backendConnectService.getIsUserAuthenticated().isUserAuthenticated);
+    //console.log(!this.backendConnectService.getIsUserAuthenticated().isUserAuthenticated);
     /* if(!this.backendConnectService.getIsUserAuthenticated().isUserAuthenticated){
       this.router.navigateByUrl('/');
     } */
@@ -32,9 +34,11 @@ export class LoginPage implements OnInit {
     if (!form.valid) {
       return;
     }
+    this.authService.login();
+    this.router.navigateByUrl('/home');
     const email = form.value.email;
     const password = form.value.password;
-    this.authenticate(email, password);
+    // this.authenticate(email, password);
   }
 
   authenticate(email: string, password: string) {
