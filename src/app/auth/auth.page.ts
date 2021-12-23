@@ -16,9 +16,11 @@ import { AuthService } from '../services/auth.service';
 export class AuthPage implements OnInit {
   isLoginMode = true;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.authService.getUserStorageData();
+  }
 
   onSubmit(form: NgForm) {
     if (!form.valid) {
@@ -34,7 +36,7 @@ export class AuthPage implements OnInit {
     const result = this.authService.signInWithEmailAndPassword(
       email,
       password
-    ).subscribe((data)=>console.log(data));
+    ).subscribe((data) => console.log(data));
     console.log(result);
     //this.router.navigate(['/']);
     /*
@@ -61,8 +63,7 @@ export class AuthPage implements OnInit {
     this.isLoginMode = !this.isLoginMode;
   }
 
-  testButton(){
-    const isAuth = this.authService.userIsAuthenticated.subscribe((isAuth)=> isAuth)
-    console.log('Hello test isAuth is: ',isAuth);
+  testButton() {
+    const isAuth = this.authService.userIsAuthenticated.subscribe((isAuth_) => console.log(isAuth_));
   }
 }

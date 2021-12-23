@@ -18,8 +18,10 @@ export class AuthGuard implements CanLoad {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+      // const isAuth = this.authService.userIsAuthenticated.subscribe((isAuth_) => isAuth_);
+      // console.log(isAuth);
+      // this.authService.getUserStorageData();
       return this.authService.userIsAuthenticated.pipe(
-        
         tap(isAuthenticated => {
           console.log(isAuthenticated);
           if (!isAuthenticated) {

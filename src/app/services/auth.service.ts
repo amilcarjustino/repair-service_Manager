@@ -5,6 +5,7 @@ import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthResponseData } from '../models/AuthResponseData';
 import { User } from '../models/User';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
   providedIn: 'root',
@@ -13,13 +14,18 @@ export class AuthService {
   webApiKey = environment.firebaseConfig.webApiKey;
   signinUrl = environment.firebaseConfig.signinUrl;
   #user = new BehaviorSubject<User>(null);
-  kk = new BehaviorSubject(null);
 
 
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient, private userStorage: Storage) {
+    this.init();
+  }
+
+  async init() {
+    await this.userStorage.create();
+  }
+
   get userIsAuthenticated() {
-    this.kk.subscribe(val=>console.log(val));
-    this.#user.subscribe(val=>console.log(val));
     return this.#user.pipe(
       map((user) => {
         if (user) {
@@ -50,11 +56,32 @@ export class AuthService {
         password,
         returnSecureToken: true,
       })
-    .pipe(tap(this.setUserData.bind(this)));
+      .pipe(tap(authData => this.setUserData(authData)));
   }
   setUserData(authData: AuthResponseData) {
-    console.log(authData);
+    const userData = new User(
+      authData.email,
+      authData.idToken,
+      authData.localId,
+      new Date(
+        new Date().getTime() + +authData.expiresIn * 1000
+      )
+    );
+    this.#user.next(userData);
+    this.userStorage.set('userData', userData);
   }
+
+  getUserStorageData() {
+    // https://github.com/ionic-team/ionic-storage#api
+    const userData = this.getStorage('userData');
+    console.log(userData);
+    // this.#user.next(userData);
+  }
+
+  async getStorage(key){
+    return await this.userStorage.get(key);
+  }
+
 
   logout() {
     // this.#userIsAuthenticated = true;
