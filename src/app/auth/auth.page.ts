@@ -7,6 +7,7 @@ import {
 } from '../services/backend-connect.service';
 import { AuthResponseData } from '../models/AuthResponseData';
 import { AuthService } from '../services/auth.service';
+import { take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-auth',
@@ -64,6 +65,12 @@ export class AuthPage implements OnInit {
   }
 
   testButton() {
-    const isAuth = this.authService.userIsAuthenticated.subscribe((isAuth_) => console.log(isAuth_));
+
+    
+    // const isAuth = this.authService.userIsAuthenticated.subscribe((isAuth_) => console.log(isAuth_));
+    // const test = this.authService.userIsAuthenticated;
+    // console.log(test);
+    const test = this.authService.autoLogin();
+    console.log(test);
   }
 }

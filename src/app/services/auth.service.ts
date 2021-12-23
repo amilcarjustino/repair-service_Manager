@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, from } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthResponseData } from '../models/AuthResponseData';
@@ -16,14 +16,6 @@ export class AuthService {
   #user = new BehaviorSubject<User>(null);
 
 
-
-  constructor(private http: HttpClient, private userStorage: Storage) {
-    this.init();
-  }
-
-  async init() {
-    await this.userStorage.create();
-  }
 
   get userIsAuthenticated() {
     return this.#user.pipe(
@@ -49,6 +41,16 @@ export class AuthService {
     );
   }
 
+
+  constructor(private http: HttpClient, private userStorage: Storage) {
+    this.init();
+  }
+
+  async init() {
+    await this.userStorage.create();
+  }
+
+
   signInWithEmailAndPassword(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(this.signinUrl + this.webApiKey, {
@@ -73,13 +75,55 @@ export class AuthService {
 
   getUserStorageData() {
     // https://github.com/ionic-team/ionic-storage#api
-    const userData = this.getStorage('userData');
-    console.log(userData);
+    this.getStorage('userData').then(
+      res=>{this.#user.next(res); console.log(res);},
+      err => alert(JSON.stringify(err))
+      );
+    
     // this.#user.next(userData);
   }
 
-  async getStorage(key){
-    return await this.userStorage.get(key);
+  getStorage(key){
+    return this.userStorage.get(key);
+  }
+
+  autoLogin() {
+    const testValue = false;
+    console.log(this.getUserStorageData());
+    return from(this.getStorage('userData')).pipe(
+      map(storedData => {
+        console.log(storedData);
+        if (!storedData || !storedData.value) {
+          return null;
+        }
+        const parsedData = JSON.parse(storedData.value) as {
+          token: string;
+          tokenExpirationDate: string;
+          userId: string;
+          email: string;
+        };
+        console.log(parsedData);
+        const expirationTime = new Date(parsedData.tokenExpirationDate);
+        if (expirationTime <= new Date()) {
+          return null;
+        }
+        const user = new User(
+          parsedData.userId,
+          parsedData.email,
+          parsedData.token,
+          expirationTime
+        );
+        console.log(user);
+        return user;
+      }),
+      tap(user => {
+        if (user) {
+          this.#user.next(user);
+          // this.autoLogout(user.tokenDuration);
+        }
+      }),
+      map(user => !!user)
+    );
   }
 
 
