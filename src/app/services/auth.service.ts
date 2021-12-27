@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { AuthResponseData } from '../models/AuthResponseData';
 import { User } from '../models/User';
 import { Storage } from '@ionic/storage-angular';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -14,43 +15,17 @@ export class AuthService {
   webApiKey = environment.firebaseConfig.webApiKey;
   signinUrl = environment.firebaseConfig.signinUrl;
   #user = new BehaviorSubject<User>(null);
+  userObservable = new BehaviorSubject<User>(null);
 
-
-
-  get userIsAuthenticated() {
-    return this.#user.pipe(
-      map((user) => {
-        if (user) {
-          return !!user.userToken;
-        } else {
-          return false;
-        }
-      })
-    );
-  }
-
-  get token() {
-    return this.#user.asObservable().pipe(
-      map((user) => {
-        if (user) {
-          return user.userToken;
-        } else {
-          return null;
-        }
-      })
-    );
-  }
-
-
-  constructor(private http: HttpClient, private userStorage: Storage) {
+  constructor(
+    private http: HttpClient,
+    private userStorage: Storage,
+    private router: Router) {
     this.init();
   }
-
   async init() {
     await this.userStorage.create();
   }
-
-
   signInWithEmailAndPassword(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(this.signinUrl + this.webApiKey, {
@@ -61,73 +36,49 @@ export class AuthService {
       .pipe(tap(authData => this.setUserData(authData)));
   }
   setUserData(authData: AuthResponseData) {
+    const expiryDate = new Date(
+      new Date().getTime() + +authData.expiresIn * 1000
+    );
+    console.log(expiryDate);
     const userData = new User(
+      authData.localId,
       authData.email,
       authData.idToken,
-      authData.localId,
-      new Date(
-        new Date().getTime() + +authData.expiresIn * 1000
-      )
+      expiryDate
     );
+    this.setStorage('userData', userData);
     this.#user.next(userData);
-    this.userStorage.set('userData', userData);
+    this.userObservable.next(userData);
   }
+
+  setStorage(key, value) {
+    this.userStorage.set(key, value).then(val => console.log('Stored:', val));;
+  }
+
 
   getUserStorageData() {
     // https://github.com/ionic-team/ionic-storage#api
-    this.getStorage('userData').then(
-      res=>{this.#user.next(res); console.log(res);},
+    return this.getStorage('userData').then(
+      res => { this.#user.next(res); console.log(res); },
       err => alert(JSON.stringify(err))
-      );
-    
+    );
     // this.#user.next(userData);
   }
 
-  getStorage(key){
+
+  getStorage(key) {
     return this.userStorage.get(key);
   }
 
-  autoLogin() {
-    const testValue = false;
-    console.log(this.getUserStorageData());
-    return from(this.getStorage('userData')).pipe(
-      map(storedData => {
-        console.log(storedData);
-        if (!storedData || !storedData.value) {
-          return null;
-        }
-        const parsedData = JSON.parse(storedData.value) as {
-          token: string;
-          tokenExpirationDate: string;
-          userId: string;
-          email: string;
-        };
-        console.log(parsedData);
-        const expirationTime = new Date(parsedData.tokenExpirationDate);
-        if (expirationTime <= new Date()) {
-          return null;
-        }
-        const user = new User(
-          parsedData.userId,
-          parsedData.email,
-          parsedData.token,
-          expirationTime
-        );
-        console.log(user);
-        return user;
-      }),
-      tap(user => {
-        if (user) {
-          this.#user.next(user);
-          // this.autoLogout(user.tokenDuration);
-        }
-      }),
-      map(user => !!user)
-    );
+  checkUserAuthenticated() {
+    return  this.getUserStorageData().then(() => this.#user.value);
   }
 
 
   logout() {
     // this.#userIsAuthenticated = true;
+    this.#user.next(null);
+    this.setStorage('userData', null);
+    this.router.navigateByUrl('/auth');
   }
 }

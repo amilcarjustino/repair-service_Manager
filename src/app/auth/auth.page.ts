@@ -20,7 +20,7 @@ export class AuthPage implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.authService.getUserStorageData();
+    // this.authService.getUserStorageData();
   }
 
   onSubmit(form: NgForm) {
@@ -37,9 +37,8 @@ export class AuthPage implements OnInit {
     const result = this.authService.signInWithEmailAndPassword(
       email,
       password
-    ).subscribe((data) => console.log(data));
-    console.log(result);
-    //this.router.navigate(['/']);
+    ).subscribe((data) => { this.router.navigate(['/']); });
+
     /*
     console.log('email: ', email);
     console.log('password: ', password);
@@ -66,11 +65,14 @@ export class AuthPage implements OnInit {
 
   testButton() {
 
-    
+    //this.authService.authenticatedUser();
+    const user = this.authService.checkUserAuthenticated();
+    console.log(user);
+    // console.log(user.userToken);
     // const isAuth = this.authService.userIsAuthenticated.subscribe((isAuth_) => console.log(isAuth_));
     // const test = this.authService.userIsAuthenticated;
     // console.log(test);
-    const test = this.authService.autoLogin();
-    console.log(test);
+    //const test = this.authService.autoLogin();
+    //console.log(test);
   }
 }

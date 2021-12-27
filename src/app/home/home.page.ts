@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BackendConnectService } from '../services/backend-connect.service';
 import { Sheet } from '../models/Sheet';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -12,26 +13,27 @@ export class HomePage {
   sheets = [];
   constructor(
     private backendConnectService: BackendConnectService,
+    private authService: AuthService,
     private router: Router
   ) { }
 
-  ionViewDidEnter() {}
+  ionViewDidEnter() { }
 
   myInit() {
-  /*   this.backendConnectService.getTocken().then(() => {
-
-      console.log(this.backendConnectService.getIsUserAuthenticated().isUserAuthenticated);
-      if (
-        !this.backendConnectService.getIsUserAuthenticated().isUserAuthenticated
-      ) {
-        this.router.navigate(['login']);
-      } else {
-        const userIdToken =
-          this.backendConnectService.getIsUserAuthenticated().userIdToken;
-        // console.log('did get here with token: ', userIdToken);
-        this.getListOfObjectFromServer(userIdToken);
-      }
-    }); */
+    /*   this.backendConnectService.getTocken().then(() => {
+  
+        console.log(this.backendConnectService.getIsUserAuthenticated().isUserAuthenticated);
+        if (
+          !this.backendConnectService.getIsUserAuthenticated().isUserAuthenticated
+        ) {
+          this.router.navigate(['login']);
+        } else {
+          const userIdToken =
+            this.backendConnectService.getIsUserAuthenticated().userIdToken;
+          // console.log('did get here with token: ', userIdToken);
+          this.getListOfObjectFromServer(userIdToken);
+        }
+      }); */
   }
 
   getListOfObjectFromServer(idToken) {
@@ -49,7 +51,7 @@ export class HomePage {
       customer: { name: 'Reader' },
       serviceType: 'Repair',
       costEstimation: { isRequired: false },
-      product: {brand:'', model:''},
+      product: { brand: '', model: '' },
       isDone: false,
       description: 'Nothing',
       creationDate: new Date(),
@@ -58,5 +60,9 @@ export class HomePage {
       finalizedDate: new Date(),
     };
     this.backendConnectService.addNewSheet(sheet);
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }
