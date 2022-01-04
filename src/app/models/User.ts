@@ -7,6 +7,7 @@ export class User {
     ) { }
 
     get userToken() {
+        return 'Amílcar';
         if (!this.tokenExpirationDate || this.tokenExpirationDate < new Date()) {
             return null;
         }

@@ -8,7 +8,7 @@ import { AuthService } from '../services/auth.service';
   providedIn: 'root',
 })
 export class AuthGuard implements CanLoad {
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
   canLoad(
     route: Route,
@@ -18,19 +18,13 @@ export class AuthGuard implements CanLoad {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    // const isAuth = this.authService.userIsAuthenticated.subscribe((isAuth_) => isAuth_);
-    // console.log(isAuth);
-    // this.authService.getUserStorageData();
-    return this.authService.checkUserAuthenticated().then(user => {
-      console.log(user);
-      console.log(!user);
+    return this.authService.checkUserAuthenticated().then((user) => {
       if (!user) {
         console.log(user);
         this.router.navigateByUrl('/auth');
         return false;
       }
       return true;
-    }
-    );
+    });
   }
 }

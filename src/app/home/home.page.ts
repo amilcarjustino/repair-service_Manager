@@ -39,13 +39,6 @@ export class HomePage {
       }); */
   }
 
-  getListOfObjectFromServer(idToken) {
-    this.backendConnectService.getList(idToken).subscribe((data) => {
-      this.sheets = Object.values(data).reverse();
-      console.log(this.sheets);
-    });
-  }
-
   onAddNewSheet() {
     this.router.navigateByUrl('new-sheet');
     const sheet: Sheet = {
@@ -65,15 +58,13 @@ export class HomePage {
     this.backendConnectService.addNewSheet(sheet);
   }
 
-  logout() {
-    this.authService.logout();
-  }
-
+  
 async presentPopover(ev){
   const popover = await this.popoverController.create({
     component:ElipsisMenuComponent,
     event: ev,
-    translucent: true
+    translucent: true,
+    dismissOnSelect: true
   });
 
   await popover.present();

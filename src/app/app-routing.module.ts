@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'settings',
     loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
   },
+  {
+    path: 'sheets',
+    loadChildren: () => import('./sheets/sheets/sheets.module').then( m => m.SheetsPageModule)
+  },
 ];
 
 @NgModule({

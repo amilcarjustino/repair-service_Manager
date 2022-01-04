@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Sheet Listing</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      Ionic Lists Example
+    </ion-list-header>
+    <ion-item *ngFor="let sheet of sheets">
+      <ion-label>
+        <h2>
+          {{sheet.client_name}}
+        </h2>
+        <p>
+          {{sheet.description}}
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

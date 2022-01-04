@@ -20,7 +20,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private userStorage: Storage,
-    private router: Router) {
+    private router: Router
+  ) {
     this.init();
   }
   async init() {
@@ -33,47 +34,52 @@ export class AuthService {
         password,
         returnSecureToken: true,
       })
-      .pipe(tap(authData => this.setUserData(authData)));
+      .pipe(tap((authData) => this.setUserData(authData)));
   }
   setUserData(authData: AuthResponseData) {
     const expiryDate = new Date(
       new Date().getTime() + +authData.expiresIn * 1000
     );
-    console.log(expiryDate);
     const userData = new User(
       authData.localId,
       authData.email,
       authData.idToken,
       expiryDate
     );
+    console.log(userData);
+    console.log(userData.userToken);
+
     this.setStorage('userData', userData);
+    this.getStorage('userData')
+      .then((res) => console.log(res))
+      .then((val) => console.log(val));
     this.#user.next(userData);
     this.userObservable.next(userData);
   }
 
   setStorage(key, value) {
-    this.userStorage.set(key, value).then(val => console.log('Stored:', val));;
+    this.userStorage.set(key, value).then((val) => console.log('Stored:', val));
   }
-
 
   getUserStorageData() {
     // https://github.com/ionic-team/ionic-storage#api
     return this.getStorage('userData').then(
-      res => { this.#user.next(res); console.log(res); },
-      err => alert(JSON.stringify(err))
+      (res) => {
+        this.#user.next(res);
+        console.log(res);
+      },
+      (err) => alert(JSON.stringify(err))
     );
     // this.#user.next(userData);
   }
-
 
   getStorage(key) {
     return this.userStorage.get(key);
   }
 
   checkUserAuthenticated() {
-    return  this.getUserStorageData().then(() => this.#user.value);
+    return this.getUserStorageData().then(() => this.#user.value);
   }
-
 
   logout() {
     // this.#userIsAuthenticated = true;
