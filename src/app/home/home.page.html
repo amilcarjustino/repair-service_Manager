@@ -48,6 +48,41 @@
 
 
 
+
+
+
+  <!-- Nested Popover -->
+  <ion-button id="nested-button">Click to open popover</ion-button>
+  <ion-popover trigger="nested-button" [dismissOnSelect]="true">
+    <ng-template>
+      <ion-content>
+        <ion-list>
+          <ion-item [button]="true" [detail]="false">
+            <ion-label>Option 1</ion-label>
+          </ion-item>
+          <ion-item [button]="true" [detail]="false">
+            <ion-label>Option 2</ion-label>
+          </ion-item>
+          <ion-item [button]="true" [detail]="true" id="nested-trigger">
+            <ion-label>Option 3</ion-label>
+          </ion-item>
+
+          <ion-popover trigger="nested-trigger" [dismissOnSelect]="true" side="end">
+            <ng-template>
+              <ion-content>
+                <ion-item [button]="true">
+                  <ion-label>Nested Option</ion-label>
+                </ion-item>
+              </ion-content>
+            </ng-template>
+          </ion-popover>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-popover>
+
+
+
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -85,58 +120,4 @@
 
 
 
-    <ion-card>
-      <ion-item href="#" class="ion-activated">
-        <ion-icon name="wifi" slot="start"></ion-icon>
-        <ion-label>Card Link Item 1 activated</ion-label>
-      </ion-item>
-
-      <ion-item href="#">
-        <ion-icon name="wine" slot="start"></ion-icon>
-        <ion-label>Card Link Item 2</ion-label>
-      </ion-item>
-
-      <ion-item class="ion-activated">
-        <ion-icon name="warning" slot="start"></ion-icon>
-        <ion-label>Card Button Item 1 activated</ion-label>
-      </ion-item>
-
-      <ion-item>
-        <ion-icon name="walk" slot="start"></ion-icon>
-        <ion-label>Card Button Item 2</ion-label>
-      </ion-item>
-    </ion-card>
-
   </ion-content>
-
-
-
-  <!-- Nested Popover -->
-  <ion-button id="nested-button">Click to open popover</ion-button>
-  <ion-popover trigger="nested-button" [dismissOnSelect]="true">
-    <ng-template>
-      <ion-content>
-        <ion-list>
-          <ion-item [button]="true" [detail]="false">
-            <ion-label>Option 1</ion-label>
-          </ion-item>
-          <ion-item [button]="true" [detail]="false">
-            <ion-label>Option 2</ion-label>
-          </ion-item>
-          <ion-item [button]="true" [detail]="true" id="nested-trigger">
-            <ion-label>Option 3</ion-label>
-          </ion-item>
-
-          <ion-popover trigger="nested-trigger" [dismissOnSelect]="true" side="end">
-            <ng-template>
-              <ion-content>
-                <ion-item [button]="true">
-                  <ion-label>Nested Option</ion-label>
-                </ion-item>
-              </ion-content>
-            </ng-template>
-          </ion-popover>
-        </ion-list>
-      </ion-content>
-    </ng-template>
-  </ion-popover>
