@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: () => import('./sheets/new-sheet/new-sheet.module').then( m => m.NewSheetPageModule),
     canLoad: [AuthGuard]
   },
+  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
+  },
 ];
 
 @NgModule({

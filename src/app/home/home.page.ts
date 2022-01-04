@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { BackendConnectService } from '../services/backend-connect.service';
 import { Sheet } from '../models/Sheet';
 import { AuthService } from '../services/auth.service';
+import { PopoverController } from '@ionic/angular';
+import { ElipsisMenuComponent } from '../components/elipsis-menu/elipsis-menu.component';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +16,8 @@ export class HomePage {
   constructor(
     private backendConnectService: BackendConnectService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private popoverController: PopoverController
   ) { }
 
   ionViewDidEnter() { }
@@ -65,4 +68,20 @@ export class HomePage {
   logout() {
     this.authService.logout();
   }
+
+async presentPopover(ev){
+  const popover = await this.popoverController.create({
+    component:ElipsisMenuComponent,
+    event: ev,
+    translucent: true
+  });
+
+  await popover.present();
+
+  const {role} = await popover.onDidDismiss();
+  console.log('onDidDismiss resolved with role', role);
+
+}
+
+
 }
