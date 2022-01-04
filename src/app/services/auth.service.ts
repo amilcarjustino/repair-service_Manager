@@ -46,13 +46,11 @@ export class AuthService {
       authData.idToken,
       expiryDate
     );
-    console.log(userData);
-    console.log(userData.userToken);
 
     this.setStorage('userData', userData);
-    this.getStorage('userData')
-      .then((res) => console.log(res))
-      .then((val) => console.log(val));
+    this.getStorage('userData');
+      //.then((res) => console.log(res))
+      //.then((val) => console.log(val));
     this.#user.next(userData);
     this.userObservable.next(userData);
   }
