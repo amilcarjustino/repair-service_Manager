@@ -85,4 +85,15 @@ export class AuthService {
     this.setStorage('userData', null);
     this.router.navigateByUrl('/auth');
   }
+
+  testStorage(){
+    const myFunc = ()=> 'Amílcari';
+    console.log(myFunc);
+    const dest = 'Ammmm';
+    const myObject = {};
+
+    this.setStorage('Ammmm', dest);
+
+    this.setStorage('amilcarFunc', myObject);
+  }
 }

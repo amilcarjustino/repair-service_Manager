@@ -64,10 +64,13 @@ export class AuthPage implements OnInit {
   }
 
   testButton() {
+    //const user = this.authService.checkUserAuthenticated();
+    //console.log(user);
+
+    this.authService.testStorage();
+    console.log('Done');
 
     //this.authService.authenticatedUser();
-    const user = this.authService.checkUserAuthenticated();
-    console.log(user);
     // console.log(user.userToken);
     // const isAuth = this.authService.userIsAuthenticated.subscribe((isAuth_) => console.log(isAuth_));
     // const test = this.authService.userIsAuthenticated;
